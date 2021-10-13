@@ -4,16 +4,10 @@ import pytest
 from playwright.sync_api import Playwright, sync_playwright
 
 @pytest.mark.smoke
-def test_login(playwright: Playwright) -> None:
+def test_login(set_up) -> None:
 
     # Assess - Given
-    browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context()
-    # Open new page
-    page = context.new_page()
-
-    page.goto("https://symonstorozhenko.wixsite.com/website-1")
-    page.set_default_timeout(3000)
+    page = set_up
 
     # Act - When/And
     # Click button:has-text("Log In")
@@ -48,13 +42,8 @@ def test_login(playwright: Playwright) -> None:
 
     # Assert - Then
     assert page.is_visible("text=My Order")
-    # Click text=My Orders
-    # with page.expect_navigation(url="https://symonstorozhenko.wixsite.com/website-1/account/my-orders"):
-    # with page.expect_navigation():
-    #     page.click("text=My Orders")
-    # ---------------------
-    # context.close()
-    # browser.close()
+
+
 
 
 
