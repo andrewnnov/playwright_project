@@ -3,9 +3,12 @@ import pytest
 from pom.home_page_elements import HomePage
 
 
-@pytest.mark.parametrize("email, password", [("test@testmail.com", "test123"),
-                                             pytest.param("fakemail@mail", "test234", marks=pytest.mark.xfail),
-                                             pytest.param("fakemail2", "test555", marks=pytest.mark.xfail)])
+@pytest.mark.parametrize("email", ["test@testmail.com",
+                                             pytest.param("fakemail", marks=pytest.mark.xfail),
+                                             pytest.param("test@testmai", marks=pytest.mark.xfail)])
+@pytest.mark.parametrize("password", ["test123",
+                                             pytest.param("test234", marks=pytest.mark.xfail),
+                                             pytest.param("test123", marks=pytest.mark.xfail)])
 def test_user_can_login(page, email, password):
 
     page.goto("https://symonstorozhenko.wixsite.com/website-1")
