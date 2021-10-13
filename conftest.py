@@ -1,7 +1,9 @@
+import os
+
 import pytest
 from playwright.sync_api import Playwright, sync_playwright
 
-import utils.secret_config
+
 
 
 @pytest.fixture(scope="session")
@@ -46,7 +48,7 @@ def login_set_up(set_up):
 
     page.click("input[type=\"password\"]")
 
-    page.fill("input[type=\"password\"]", utils.secret_config.PASSWORD)
+    page.fill("input[type=\"password\"]", os.environ['PASSWORD'])
 
     page.click("[data-testid=\"submit\"] [data-testid=\"buttonElement\"]")
 
