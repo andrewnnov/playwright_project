@@ -9,7 +9,7 @@ def test_about_us_section_verbiage(login_set_up) -> None:
     # Assess - Given
     page = login_set_up
 
-    assert not page.is_visible(HomePage.celebrating_beauty_header)
+    assert page.is_visible(HomePage.celebrating_beauty_header)
 
     assert page.is_visible(HomePage.celebrating_beauty_body)
 
