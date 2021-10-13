@@ -3,7 +3,11 @@ import os
 import pytest
 from playwright.sync_api import Playwright, sync_playwright
 
-
+try:
+    PASSWORD = os.environ['PASSWORD']
+except KeyError:
+    import utils.secret_config
+    PASSWORD = utils.secret_config.PASSWORD
 
 
 @pytest.fixture(scope="session")
@@ -48,7 +52,7 @@ def login_set_up(set_up):
 
     page.click("input[type=\"password\"]")
 
-    page.fill("input[type=\"password\"]", os.environ['PASSWORD'])
+    page.fill("input[type=\"password\"]", PASSWORD)
 
     page.click("[data-testid=\"submit\"] [data-testid=\"buttonElement\"]")
 
