@@ -1,8 +1,10 @@
 import pytest
 from playwright.sync_api import Playwright, sync_playwright
 
+import utils.secret_config
 
-@pytest.fixture(scope="function")
+
+@pytest.fixture(scope="session")
 def set_up(browser):
     # Assess - Given
     # browser = playwright.chromium.launch(headless=False)
@@ -17,7 +19,7 @@ def set_up(browser):
     page.close()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def login_set_up(set_up):
 
     page = set_up
@@ -44,7 +46,7 @@ def login_set_up(set_up):
 
     page.click("input[type=\"password\"]")
 
-    page.fill("input[type=\"password\"]", "test123")
+    page.fill("input[type=\"password\"]", utils.secret_config.PASSWORD)
 
     page.click("[data-testid=\"submit\"] [data-testid=\"buttonElement\"]")
 
